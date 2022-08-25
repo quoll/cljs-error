@@ -1,4 +1,5 @@
-(ns error.core)
+(ns error.core
+  (:require [clojure.string :as string])
 
 
 (defn name-of
@@ -27,6 +28,6 @@
          (when-let [column (.-columnNumber e)]
            {:column-number column})
          (when-let [stack (.-stack e)]
-           (when (seq stack) {:stack stack}))))
+           (when (seq stack) {:stack (string/split-lines stack)}))))
 
 (def Throwable->map Error->map)
